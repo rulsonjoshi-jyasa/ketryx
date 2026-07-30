@@ -3,24 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ketryx Learning Project</title>
+    <title>Ketryx Release Checklist</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <main class="app">
       <section class="card">
-        <h1>Ketryx Learning Project</h1>
-        <p class="subtitle">A simple task tracker to learn HTML, CSS, and JavaScript.</p>
+        <div class="hero">
+          <p class="eyebrow">Release readiness demo</p>
+          <h1>Ketryx Release Checklist</h1>
+          <p class="subtitle">Track launch tasks, verify readiness, and keep your release moving smoothly.</p>
+        </div>
+
+        <div id="task-summary" class="summary" aria-live="polite"></div>
 
         <form id="task-form">
-          <input id="task-input" type="text" placeholder="Add a task" required />
-          <button type="submit">Add</button>
+          <input id="task-input" type="text" placeholder="Add a release task" required />
+          <button type="submit">Add task</button>
         </form>
 
         <ul id="task-list"></ul>
       </section>
     </main>
 
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
   </body>
 </html>

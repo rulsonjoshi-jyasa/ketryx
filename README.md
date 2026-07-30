@@ -1,18 +1,26 @@
-# Ketryx Learning Project
+# Ketryx Release Checklist Demo
 
-This is a small starter project for learning web fundamentals.
+A polished, lightweight web app for showcasing a release-readiness checklist in a simple demo environment.
 
-## What it includes
-- HTML structure
-- CSS styling
-- JavaScript interactivity
-- Local storage for saved tasks
+## Highlights
+- Clean release-style UI
+- Add, complete, undo, and remove tasks
+- Local persistence with browser storage
+- Automated tests for core task behavior
 
-## Run it
-From this folder, run:
-
+## Run locally
 ```bash
+cd /Users/jyasa/projects/test/ketryx
 npm start
 ```
-
 Then open http://localhost:8000 in your browser.
+
+## Test
+```bash
+cd /Users/jyasa/projects/test/ketryx
+npm test
+```
+
+## Release notes
+- Initial release-ready demo for Ketryx
+- Added task summary, polished styling, and test coverage

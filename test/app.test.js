@@ -1,26 +1,35 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
-import path from 'node:path';
+import { addTask, toggleTask, deleteTask, getTaskSummary } from '../script.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const rootDir = path.resolve(__dirname, '..');
+test('addTask trims input and creates a new task', () => {
+  const tasks = [];
+  const nextTasks = addTask(tasks, '   Ship release demo   ');
 
-function readProjectFile(relativePath) {
-  return readFileSync(path.join(rootDir, relativePath), 'utf8');
-}
-
-test('project files exist and are wired together', () => {
-  assert.match(readProjectFile('index.html'), /<title>Ketryx Learning Project<\/title>/);
-  assert.match(readProjectFile('index.html'), /<script src="script.js"><\/script>/);
-  assert.match(readProjectFile('script.js'), /localStorage/);
-  assert.match(readProjectFile('styles.css'), /\.card/);
+  assert.equal(nextTasks.length, 1);
+  assert.equal(nextTasks[0].text, 'Ship release demo');
+  assert.equal(nextTasks[0].completed, false);
 });
 
-test('package.json exposes a start script and a test script', () => {
-  const pkg = JSON.parse(readProjectFile('package.json'));
-  assert.equal(pkg.scripts.start.includes('http.server'), true);
-  assert.equal(pkg.scripts.test, 'node --test');
+test('toggleTask and deleteTask update task state correctly', () => {
+  const tasks = [{ text: 'Review checklist', completed: false }];
+  const toggled = toggleTask(tasks, 0);
+  const removed = deleteTask(tasks, 0);
+
+  assert.equal(toggled[0].completed, true);
+  assert.deepEqual(removed, []);
+});
+
+test('getTaskSummary returns totals for active and completed tasks', () => {
+  const tasks = [
+    { text: 'Prepare release notes', completed: false },
+    { text: 'Verify onboarding', completed: true },
+    { text: 'Share demo link', completed: false },
+  ];
+
+  assert.deepEqual(getTaskSummary(tasks), {
+    total: 3,
+    completed: 1,
+    pending: 2,
+  });
 });
